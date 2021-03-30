@@ -5,8 +5,8 @@ Clase de obiecte
 
 - User
 - Product:
-  • Food
-  • Drink
+  - Food
+  - Drink
 - Vehicle
 - Driver
 - Venue
