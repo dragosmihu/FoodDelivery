@@ -8,13 +8,13 @@ public class Order {
     private User user;
     private Venue venue;
     private Driver driver;
-    private int total;
-    private List<Product> products;
+    private double total;
+    private Product[] products;
 
     public Order() {
     }
 
-    public Order(Date date, User user, Venue venue, Driver driver, int total, List<Product> products) {
+    public Order(Date date, User user, Venue venue, Driver driver, double total, Product[] products) {
         this.date = date;
         this.user = user;
         this.venue = venue;
@@ -55,7 +55,7 @@ public class Order {
         this.driver = driver;
     }
 
-    public int getTotal() {
+    public double getTotal() {
         return total;
     }
 
@@ -63,11 +63,11 @@ public class Order {
         this.total = total;
     }
 
-    public List<Product> getProducts() {
+    public Product[] getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Product[] products) {
         this.products = products;
     }
 }

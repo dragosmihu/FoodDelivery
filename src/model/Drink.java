@@ -18,4 +18,9 @@ public class Drink extends  Product{
     public void setBottleCapacity(double bottleCapacity) {
         this.bottleCapacity = bottleCapacity;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Bottle capacity: " + bottleCapacity;
+    }
 }

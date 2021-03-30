@@ -47,4 +47,9 @@ public class Driver {
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + firstName + lastName + "\nPhone number: " + phoneNumber + "\n" + vehicle;
+    }
 }

@@ -27,4 +27,9 @@ public class Vehicle {
     public void setNoOfSeats(int noOfSeats) {
         this.noOfSeats = noOfSeats;
     }
+
+    @Override
+    public String toString() {
+        return "Vehicle:\n Number of wheels: " +noOfWheels + "; Number of seats: " + noOfSeats + "\n";
+    }
 }

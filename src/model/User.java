@@ -11,12 +11,12 @@ public class User implements Comparable<User> {
         spentMoney = 0;
     }
 
-    public User(String firstName, String lastName, int age, int noOfOrders, double spentMoney) {
+    public User(String firstName, String lastName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.noOfOrders = noOfOrders;
-        this.spentMoney = spentMoney;
+        this.noOfOrders = 0;
+        this.spentMoney = 0;
     }
 
     public String getFirstName() {
@@ -57,6 +57,13 @@ public class User implements Comparable<User> {
 
     public void setSpentMoney(double spentMoney) {
         this.spentMoney = spentMoney;
+    }
+
+    public void newOrder(double spentMoney) {this.spentMoney += spentMoney; this.noOfOrders += 1;}
+
+    @Override
+    public String toString() {
+        return "Name: " + firstName + lastName + "\n" + "Age: " + age + "; Number of orders: " + noOfOrders + "; Total spent money: " + spentMoney;
     }
 
     @Override

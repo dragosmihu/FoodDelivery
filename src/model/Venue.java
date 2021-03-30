@@ -1,23 +1,23 @@
 package model;
 
+import java.util.Arrays;
 import java.util.List;
 
 
 public class Venue {
     private String address;
     private String name;
-    private List<Product> menu;
+    private Product[] menu;
     private double earnedMoney;
 
     public Venue() {
         earnedMoney = 0;
     }
 
-    public Venue(String address, String name, List<Product> menu, double earnedMoney) {
+    public Venue(String address, String name, Product[] menu) {
         this.address = address;
         this.name = name;
         this.menu = menu;
-        this.earnedMoney = earnedMoney;
     }
 
     public String getAddress() {
@@ -36,11 +36,11 @@ public class Venue {
         this.name = name;
     }
 
-    public List<Product> getMenu() {
+    public Product[] getMenu() {
         return menu;
     }
 
-    public void setMenu(List<Product> menu) {
+    public void setMenu(Product[] menu) {
         this.menu = menu;
     }
 
@@ -50,5 +50,19 @@ public class Venue {
 
     public void setEarnedMoney(double earnedMoney) {
         this.earnedMoney = earnedMoney;
+    }
+
+    public void increaseEarnedMoney(double earnedMoney){
+        this.earnedMoney += earnedMoney;
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer returnString = new StringBuffer("Name: " + name+ "; Address: " + address);
+        for(Product p : menu){
+            returnString.append(p);
+        }
+        returnString.append("\nEarned money: " + earnedMoney);
+        return returnString.toString();
     }
 }

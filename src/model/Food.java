@@ -30,4 +30,23 @@ public class Food extends Product{
     public void setTaste(Taste taste) {
         this.taste = taste;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer returnString = new StringBuffer(super.toString() + "Ingredients: ");
+        for (String s : ingredients){
+            returnString.append(s+", ");
+        }
+        returnString.append("\n Taste: ");
+        switch (taste){
+            case SALTY: returnString.append("salty");
+            break;
+            case SWEET: returnString.append("sweet");
+            break;
+            case SOUR: returnString.append("sour");
+            break;
+            default: returnString.append("bitter");
+        }
+        return returnString.toString();
+    }
 }
