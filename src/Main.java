@@ -13,5 +13,8 @@ public class Main {
         Venue venue = appService.createVenue(product1, product2);
         Order order = appService.createOrder(user,venue,driver,product1, product2);
         appService.displayOrder(order);
+        appService.listAllProducts();
+        appService.listAllUsers();
+        System.out.println("The sum of venue's products is " + appService.sumOfProducts(venue));
     }
 }

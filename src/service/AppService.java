@@ -137,4 +137,22 @@ public class AppService {
         System.out.println("User: ");
         System.out.println(o.getUser());
     }
+    public void listAllUsers(){
+        for(User u : users){
+            System.out.println(u);
+        }
+    }
+    public void listAllProducts(){
+        for(Product p : products){
+            System.out.println(p);
+        }
+    }
+
+    public double sumOfProducts(Venue venue){
+        double totalSum = 0;
+        for(Product p : venue.getMenu()){
+            totalSum += p.getPrice();
+        }
+        return totalSum;
+    }
 }
