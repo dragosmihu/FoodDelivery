@@ -1,5 +1,6 @@
 import model.*;
 import service.AppService;
+import service.AuditService;
 import service.ReadWriteCSVService;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.util.*;
 public class Main {
     private static final AppService appService = new AppService();
     private static int option = -1;
-    private static void menu(){
+    private static void menu() throws IOException {
         System.out.println("1) Create user");
         System.out.println("2) Create product");
         System.out.println("3) Create vehicle");
@@ -27,9 +28,9 @@ public class Main {
         scanner.nextLine();
 
         switch (option){
-            case 1: appService.createUser(); menu();
-            case 2: appService.createProduct(); menu();
-            case 3: appService.createVehicle(); menu();
+            case 1: appService.createUser(); AuditService.audit("create_user"); menu();
+            case 2: appService.createProduct(); AuditService.audit("create_product"); menu();
+            case 3: appService.createVehicle(); AuditService.audit("create_vehicle"); menu();
             case 4: {
                 System.out.println("Type driver's vehicle producer");
                 String producer = scanner.nextLine();
@@ -41,7 +42,9 @@ public class Main {
                     return;
                 }
                 appService.createDriver(vehicle.get());
+                AuditService.audit("create_driver");
                 menu();
+
             }
             case 5:{
                 System.out.println("Type product names; after you listed all products, type NOMORE");
@@ -68,6 +71,7 @@ public class Main {
 
                 }
                 appService.createVenue(products);
+                AuditService.audit("create_venue");
                 menu();
             }
             case 6:{
@@ -134,11 +138,12 @@ public class Main {
                 }
 
                 appService.createOrder(user.get(),venue.get(), driver.get(),products);
+                AuditService.audit("create_order");
                 menu();
             }
-            case 7: System.out.println(appService.getOrders().get(appService.getOrders().size() - 1)); menu();
-            case 8: appService.listAllProducts(); menu();
-            case 9: appService.listAllUsers(); menu();
+            case 7: System.out.println(appService.getOrders().get(appService.getOrders().size() - 1)); AuditService.audit("get_last_order");  menu();
+            case 8: appService.listAllProducts(); AuditService.audit("list_all_products"); menu();
+            case 9: appService.listAllUsers(); AuditService.audit("list_all_users"); menu();
             case 10: {
                 Optional<Venue> venue = Optional.empty();
                 while(venue.isEmpty()){
@@ -151,6 +156,7 @@ public class Main {
                     }
                 }
                 System.out.println("The sum of venue's products is " + appService.sumOfProducts(venue.get()));
+                AuditService.audit("sum_of_products");
                 menu();
             }
             case 0: return;
