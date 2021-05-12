@@ -40,6 +40,6 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle:\n Number of wheels: " +noOfWheels + "; Number of seats: " + noOfSeats + "\n";
+        return "Vehicle:\n Number of wheels: " +noOfWheels + "; Number of seats: " + noOfSeats + "\n" + "Producer: " + producer;
     }
 }

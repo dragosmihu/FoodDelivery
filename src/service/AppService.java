@@ -7,6 +7,34 @@ import java.util.*;
 public class AppService {
     private static Set<User> users = new TreeSet<User>();
     private static List<Product> products = new ArrayList<Product>();
+    private static List<Vehicle> vehicles = new ArrayList<>();
+    private static List<Driver> drivers = new ArrayList<>();
+    private static List<Venue> venues = new ArrayList<>();
+    private static List<Order> orders = new ArrayList<>();
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public List<Driver> getDrivers() {
+        return drivers;
+    }
+
+    public List<Venue> getVenues() {
+        return venues;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
 
     public User createUser(){
         System.out.println("Creating user...");
@@ -79,11 +107,13 @@ public class AppService {
         int noOfWheels = scanner.nextInt();
         System.out.print("Number of seats: ");
         int noOfSeats = scanner.nextInt();
+        scanner.nextLine();
         System.out.print("Producer: ");
         String producer = scanner.nextLine();
         Vehicle vehicle = new Vehicle(noOfWheels, noOfSeats, producer);
         System.out.println("-----------------------------\nVehicle created\n-----------------------------");
 
+        vehicles.add(vehicle);
         return vehicle;
     }
 
@@ -101,6 +131,8 @@ public class AppService {
         System.out.println("-----------------------------\nDriver created\n-----------------------------");
 
         Driver driver = new Driver(firstName,lastName,phoneNumber, vehicle);
+
+        drivers.add(driver);
         return driver;
     }
 
@@ -115,19 +147,24 @@ public class AppService {
         System.out.println("-----------------------------\nVenue created\n-----------------------------");
 
         Venue venue = new Venue(address,name,products);
+
+        venues.add(venue);
         return venue;
     }
 
     public Order createOrder(User user, Venue venue, Driver driver, Product... products){
         double total = 0;
         for (Product p : products){
-            total += p.getPrice();
+            if(p != null)
+                total += p.getPrice();
         }
         user.newOrder(total);
         venue.increaseEarnedMoney(total);
 
         Date date = new Date();
         Order order = new Order(date, user,venue, driver, total, products);
+
+        orders.add(order);
         return order;
     }
 
@@ -153,7 +190,8 @@ public class AppService {
     public double sumOfProducts(Venue venue){
         double totalSum = 0;
         for(Product p : venue.getMenu()){
-            totalSum += p.getPrice();
+            if(p != null)
+                totalSum += p.getPrice();
         }
         return totalSum;
     }
