@@ -79,7 +79,9 @@ public class AppService {
         int noOfWheels = scanner.nextInt();
         System.out.print("Number of seats: ");
         int noOfSeats = scanner.nextInt();
-        Vehicle vehicle = new Vehicle(noOfWheels, noOfSeats);
+        System.out.print("Producer: ");
+        String producer = scanner.nextLine();
+        Vehicle vehicle = new Vehicle(noOfWheels, noOfSeats, producer);
         System.out.println("-----------------------------\nVehicle created\n-----------------------------");
 
         return vehicle;
