@@ -32,5 +32,7 @@ public class Main {
         User f = new User("Dragos", "Mihu", 21);
         Food food = new Food("pizza", 30, Arrays.asList("flour", "salami", "cheese"), Taste.SALTY);
         rwService.writeCSV(food);
+        List<Food> foods = rwService.readCSV("Food");
+        System.out.print(foods);
     }
 }

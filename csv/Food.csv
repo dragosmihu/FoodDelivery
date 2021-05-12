@@ -1,2 +1,4 @@
-name,rice,ingredients[],taste
+name,price,ingredients[],tastepizza,30.0,[flour, salami, cheese],SALTY
+pizza,30.0,[flour, salami, cheese],SALTY
+pizza,30.0,[flour, salami, cheese],SALTY
 pizza,30.0,[flour, salami, cheese],SALTY

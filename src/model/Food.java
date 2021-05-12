@@ -39,13 +39,13 @@ public class Food extends Product{
         }
         returnString.append("\n Taste: ");
         switch (taste){
-            case SALTY: returnString.append("salty");
+            case SALTY: returnString.append("salty\n");
             break;
-            case SWEET: returnString.append("sweet");
+            case SWEET: returnString.append("sweet\n");
             break;
-            case SOUR: returnString.append("sour");
+            case SOUR: returnString.append("sour\n");
             break;
-            default: returnString.append("bitter");
+            default: returnString.append("bitter\n");
         }
         return returnString.toString();
     }
