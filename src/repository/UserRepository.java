@@ -28,19 +28,21 @@ public class UserRepository {
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            DatabaseConfiguration.closeDatabaseConnection();
+
             return mapToUser(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DatabaseConfiguration.closeDatabaseConnection();
         }
         DatabaseConfiguration.closeDatabaseConnection();
         return null;
     }
 
     // PreparedStatement
-    public void updateUserName(String firstName, String lastName, int id) {
+    public static void updateUserName(String firstName, String lastName, int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
-        String updateNameSql = "UPDATE users SET (firstName, lastName)=(?,?) WHERE UserId=?";
+        String updateNameSql = "UPDATE users SET firstName=?, lastName=? WHERE UserId=?";
 
         try {
             PreparedStatement preparedStatement = databaseConnection.prepareStatement(updateNameSql);
@@ -65,9 +67,9 @@ public class UserRepository {
         return null;
     }
 
-    public void delete(int id) throws  SQLException {
+    public static void delete(int id) throws  SQLException {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
-        String sql = "DELETE FROM locations WHERE location_id=" + id;
+        String sql = "DELETE FROM users WHERE UserId=" + id;
         Statement statement = databaseConnection.createStatement();
 
         int rows = statement.executeUpdate(sql);

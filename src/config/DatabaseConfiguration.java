@@ -1,11 +1,14 @@
 package config;
 
-public class DatabaseConnection {
-    public class DatabaseConfiguration {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-        private static final String DB_URL = "jdbc:mysql://localhost:3306/lab11";
-        private static final String USER = "user";
-        private static final String PASSWORD = "pass";
+public class DatabaseConfiguration {
+
+        private static final String DB_URL = "jdbc:mysql://localhost:3306/foodDelivery";
+        private static final String USER = "dragos";
+        private static final String PASSWORD = "dragos";
 
         private static Connection databaseConnection;
 
@@ -32,5 +35,5 @@ public class DatabaseConnection {
                 e.printStackTrace();
             }
         }
-    }
+
 }

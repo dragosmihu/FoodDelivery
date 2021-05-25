@@ -28,15 +28,18 @@ public class FoodIngredientRepository {
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            ingredients.add(IngredientRepository.getIngredientById(resultSet.getInt(2)));
-            while(resultSet.next())
+
+            while(resultSet.next()) {
+                System.out.println("-----\n");
                 ingredients.add(IngredientRepository.getIngredientById(resultSet.getInt(2)));
-            DatabaseConfiguration.closeDatabaseConnection();
+
+            }
+            preparedStatement.close();
             return ingredients;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        DatabaseConfiguration.closeDatabaseConnection();
+
         return null;
     }
 
@@ -48,7 +51,7 @@ public class FoodIngredientRepository {
             preparedStatement.setInt(1, foodId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            do{
+            while (resultSet.next()){
                 String ingredientName = IngredientRepository.getIngredientById(resultSet.getInt(2));
                 if (ingredients.contains(ingredientName)){
                     ingredients.remove(ingredientName);
@@ -60,7 +63,7 @@ public class FoodIngredientRepository {
                     int rows = statement.executeUpdate(sql);
                 }
 
-            }while (resultSet.next());
+            }
 
             for(String ingredient : ingredients){
                 int ingredientId = IngredientRepository.getIngredientByName(ingredient);

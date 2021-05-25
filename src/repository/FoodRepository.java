@@ -18,13 +18,15 @@ public class FoodRepository {
         String sql = "INSERT INTO foods (ProductId, taste)"
                 + " VALUES('" + prodId + "', '" + food.getTaste()+"')";
         Statement stmt = databaseConnection.createStatement();
-        int foodId = stmt.executeUpdate(sql);
+        int row = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+
         for (String ingredient:food.getIngredients()){
             int ingredientId = IngredientRepository.getIngredientByName(ingredient);
             if(ingredientId == 0){
                 ingredientId = IngredientRepository.insertIngredient(ingredient);
             }
-            FoodIngredientRepository.insert(foodId, ingredientId);
+            System.out.println(ingredientId);
+            FoodIngredientRepository.insert(prodId, ingredientId);
 
         }
 
@@ -39,10 +41,11 @@ public class FoodRepository {
         try {
             Statement stmt = databaseConnection.createStatement();
             ResultSet resultSet = stmt.executeQuery(selectSql);
-            foods.add(mapToFood(resultSet));
-            while (resultSet.next()){
 
-                foods.add(mapToFood(resultSet));
+            while (true){
+                Food food = mapToFood(resultSet);
+                if (food == null) break;
+                foods.add(food);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,7 +55,7 @@ public class FoodRepository {
     }
 
     // PreparedStatement
-    public void updateFood(String name, double price, List<String> ingredients, Taste T, int id) {
+    public static void updateFood(String name, double price, List<String> ingredients, Taste T, int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
 
         String updateNameSql = "UPDATE foods SET taste = ? WHERE ProductId=?";
@@ -74,8 +77,10 @@ public class FoodRepository {
 
     private static Food mapToFood(ResultSet resultSet) throws SQLException {
         if (resultSet.next()){
-            Product base = ProductRepository.getProductById(resultSet.getInt(1));
-            List<String> ingredients = FoodIngredientRepository.getIngredientsByFoodId(resultSet.getInt(1));
+            int id =resultSet.getInt(1);
+            Product base = ProductRepository.getProductById(id);
+            List<String> ingredients = FoodIngredientRepository.getIngredientsByFoodId(id);
+
             Taste T = switch (resultSet.getString(2)) {
                 case "sweet" -> Taste.SWEET;
                 case "sour" -> Taste.SOUR;
@@ -88,7 +93,17 @@ public class FoodRepository {
         return null;
     }
 
-    public void delete(int id) throws  SQLException {
+    public static void delete(int id) throws  SQLException {
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        String sql = "DELETE FROM foodingredient WHERE FoodId=" + id;
+        Statement statement = databaseConnection.createStatement();
+
+        int rows = statement.executeUpdate(sql);
+        sql = "DELETE FROM foods WHERE ProductID=" + id;
+        Statement statement2 = databaseConnection.createStatement();
+
+        statement2.executeUpdate(sql);
         ProductRepository.delete(id);
+        DatabaseConfiguration.closeDatabaseConnection();
     }
 }

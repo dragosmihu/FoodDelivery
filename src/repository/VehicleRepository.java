@@ -26,10 +26,10 @@ public class VehicleRepository {
         try {
             Statement stmt = databaseConnection.createStatement();
             ResultSet resultSet = stmt.executeQuery(selectSql);
-            vehicles.add(mapToVehicle(resultSet));
-            while (resultSet.next()){
-
-                vehicles.add(mapToVehicle(resultSet));
+            while (true){
+                Vehicle vehicle = mapToVehicle(resultSet);
+                if(vehicle == null) break;
+                vehicles.add(vehicle);
             }
         } catch (SQLException e) {
             e.printStackTrace();

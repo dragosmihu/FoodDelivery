@@ -8,14 +8,17 @@ import java.sql.*;
 public class IngredientRepository {
     public static int insertIngredient(String ingredient) throws SQLException {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
-        String sql = "INSERT INTO ingredients name"
+        String sql = "INSERT INTO ingredients (name)"
                 + " VALUES('" + ingredient  +"')";
 
         Statement statement = databaseConnection.createStatement();
         int rows = statement.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+        ResultSet resultSet = statement.getGeneratedKeys();
+        if(resultSet.next())
+            return resultSet.getInt(1);
+      //DatabaseConfiguration.closeDatabaseConnection();
+        return 0;
 
-        DatabaseConfiguration.closeDatabaseConnection();
-        return rows;
     }
 
     // PreparedStatement - use when we have parameters
@@ -28,12 +31,13 @@ public class IngredientRepository {
             preparedStatement.setString(1, ingredient);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            DatabaseConfiguration.closeDatabaseConnection();
-            return resultSet.getInt(1);
+
+            if(resultSet.next())
+                return resultSet.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        DatabaseConfiguration.closeDatabaseConnection();
+
         return 0;
     }
 
@@ -46,12 +50,16 @@ public class IngredientRepository {
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            DatabaseConfiguration.closeDatabaseConnection();
-            return resultSet.getString(2);
+            if (resultSet.next()){
+
+                String ingredient =  resultSet.getString(2);
+                preparedStatement.close();
+                return  ingredient;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        DatabaseConfiguration.closeDatabaseConnection();
+
         return null;
     }
 

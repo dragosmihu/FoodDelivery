@@ -36,7 +36,7 @@ public class AppService {
         return orders;
     }
 
-    public User createUser(){
+    public static User createUser(){
         System.out.println("Creating user...");
         Scanner scanner = new Scanner(System.in);
         System.out.print("First name: ");
@@ -51,7 +51,7 @@ public class AppService {
         return user;
     }
 
-    public Product createProduct(){
+    public static Product createProduct(){
         System.out.println("Creating product...");
         Product product;
         Scanner scanner = new Scanner(System.in);
@@ -100,7 +100,7 @@ public class AppService {
 
     }
 
-    public Vehicle createVehicle(){
+    public static Vehicle createVehicle(){
         System.out.println("Creating vehicle...");
         Scanner scanner = new Scanner(System.in);
         System.out.print("Number of wheels: ");

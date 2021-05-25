@@ -31,10 +31,11 @@ public class DrinkRepository {
         try {
             Statement stmt = databaseConnection.createStatement();
             ResultSet resultSet = stmt.executeQuery(selectSql);
-            drinks.add(mapToDrink(resultSet));
-            while (resultSet.next()){
 
-                drinks.add(mapToDrink(resultSet));
+            while (true){
+                Drink drink = mapToDrink(resultSet);
+                if(drink == null) break;
+                drinks.add(drink);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -44,7 +45,7 @@ public class DrinkRepository {
     }
 
     // PreparedStatement
-    public void updateDrink(String name, double price,double bottleCapacity, int id) {
+    public static void updateDrink(String name, double price, double bottleCapacity, int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
 
         String updateNameSql = "UPDATE drinks SET bottleCapacity=? WHERE ProductId=?";
@@ -72,8 +73,15 @@ public class DrinkRepository {
         return null;
     }
 
-    public void delete(int id) throws  SQLException {
+    public static void delete(int id) throws  SQLException {
+        Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
+        String sql = "DELETE FROM drinks WHERE ProductId=" + id;
+        Statement statement = databaseConnection.createStatement();
+
+        int rows = statement.executeUpdate(sql);
+
         ProductRepository.delete(id);
+        DatabaseConfiguration.closeDatabaseConnection();
     }
 
 }

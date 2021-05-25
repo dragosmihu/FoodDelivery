@@ -14,9 +14,13 @@ public class ProductRepository {
 
         Statement statement = databaseConnection.createStatement();
         int rows = statement.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
-
-        DatabaseConfiguration.closeDatabaseConnection();
-        return rows;
+        ResultSet resultSet = statement.getGeneratedKeys();
+        if(resultSet.next()){
+            return resultSet.getInt(1);
+        }
+       // statement.close();
+       // DatabaseConfiguration.closeDatabaseConnection();
+        return 0;
     }
 
     // PreparedStatement - use when we have parameters
@@ -29,12 +33,11 @@ public class ProductRepository {
             preparedStatement.setInt(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            DatabaseConfiguration.closeDatabaseConnection();
+
             return mapToProduct(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        DatabaseConfiguration.closeDatabaseConnection();
         return null;
     }
 
