@@ -13,7 +13,7 @@ public class FoodIngredientRepository {
                 + " VALUES('" + foodId + "', '" + ingredientId+"')";
 
         Statement statement = databaseConnection.createStatement();
-        int rows = statement.executeUpdate(sql);
+        statement.executeUpdate(sql);
 
         DatabaseConfiguration.closeDatabaseConnection();
     }
@@ -60,7 +60,7 @@ public class FoodIngredientRepository {
                     String sql = "DELETE FROM foodingredient WHERE FoodId=" + foodId+" AND IngredientId="+resultSet.getInt(2);
                     Statement statement = databaseConnection.createStatement();
 
-                    int rows = statement.executeUpdate(sql);
+                    statement.executeUpdate(sql);
                 }
 
             }

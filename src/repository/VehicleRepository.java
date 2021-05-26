@@ -14,7 +14,7 @@ public class VehicleRepository {
                 + " VALUES('" + vehicle.getNoOfSeats() + "', '" + vehicle.getNoOfWheels() + "', '" + vehicle.getProducer() +"')";
         Statement statement = databaseConnection.createStatement();
 
-        int rows = statement.executeUpdate(sql);
+        statement.executeUpdate(sql);
         DatabaseConfiguration.closeDatabaseConnection();
     }
 
@@ -69,7 +69,7 @@ public class VehicleRepository {
         String sql = "DELETE FROM vehicles WHERE VehicleId=" + id;
         Statement statement = databaseConnection.createStatement();
 
-        int rows = statement.executeUpdate(sql);
+        statement.executeUpdate(sql);
         DatabaseConfiguration.closeDatabaseConnection();
     }
 

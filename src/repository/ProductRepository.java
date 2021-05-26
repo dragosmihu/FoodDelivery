@@ -13,7 +13,7 @@ public class ProductRepository {
                 + " VALUES('" + product.getName() + "', '" + product.getPrice() +"')";
 
         Statement statement = databaseConnection.createStatement();
-        int rows = statement.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+        statement.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
         ResultSet resultSet = statement.getGeneratedKeys();
         if(resultSet.next()){
             return resultSet.getInt(1);
@@ -72,7 +72,7 @@ public class ProductRepository {
         String sql = "DELETE FROM products WHERE ProductId=" + id;
         Statement statement = databaseConnection.createStatement();
 
-        int rows = statement.executeUpdate(sql);
+        statement.executeUpdate(sql);
         DatabaseConfiguration.closeDatabaseConnection();
     }
 }

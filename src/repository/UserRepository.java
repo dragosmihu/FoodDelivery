@@ -14,7 +14,7 @@ public class UserRepository {
                 + " VALUES('" + user.getFirstName() + "', '" + user.getLastName() + "', '" + user.getAge() +"', '" + user.getNoOfOrders()+"', '" + user.getSpentMoney()+"')";
         Statement statement = databaseConnection.createStatement();
 
-        int rows = statement.executeUpdate(sql);
+        statement.executeUpdate(sql);
         DatabaseConfiguration.closeDatabaseConnection();
     }
 
@@ -71,7 +71,7 @@ public class UserRepository {
         String sql = "DELETE FROM users WHERE UserId=" + id;
         Statement statement = databaseConnection.createStatement();
 
-        int rows = statement.executeUpdate(sql);
+        statement.executeUpdate(sql);
         DatabaseConfiguration.closeDatabaseConnection();
     }
 

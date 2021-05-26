@@ -12,7 +12,7 @@ public class IngredientRepository {
                 + " VALUES('" + ingredient  +"')";
 
         Statement statement = databaseConnection.createStatement();
-        int rows = statement.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
+        statement.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
         ResultSet resultSet = statement.getGeneratedKeys();
         if(resultSet.next())
             return resultSet.getInt(1);

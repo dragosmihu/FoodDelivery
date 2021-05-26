@@ -18,7 +18,7 @@ public class FoodRepository {
         String sql = "INSERT INTO foods (ProductId, taste)"
                 + " VALUES('" + prodId + "', '" + food.getTaste()+"')";
         Statement stmt = databaseConnection.createStatement();
-        int row = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+        stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 
         for (String ingredient:food.getIngredients()){
             int ingredientId = IngredientRepository.getIngredientByName(ingredient);
@@ -98,7 +98,7 @@ public class FoodRepository {
         String sql = "DELETE FROM foodingredient WHERE FoodId=" + id;
         Statement statement = databaseConnection.createStatement();
 
-        int rows = statement.executeUpdate(sql);
+        statement.executeUpdate(sql);
         sql = "DELETE FROM foods WHERE ProductID=" + id;
         Statement statement2 = databaseConnection.createStatement();
 

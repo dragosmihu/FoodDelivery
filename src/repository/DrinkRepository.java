@@ -19,7 +19,7 @@ public class DrinkRepository {
                 + " VALUES('" + prodId + "', '" + drink.getBottleCapacity()+"')";
         Statement drinkStatement = databaseConnection.createStatement();
 
-        int row = drinkStatement.executeUpdate(sqlDrink);
+        drinkStatement.executeUpdate(sqlDrink);
         DatabaseConfiguration.closeDatabaseConnection();
     }
 
@@ -78,7 +78,7 @@ public class DrinkRepository {
         String sql = "DELETE FROM drinks WHERE ProductId=" + id;
         Statement statement = databaseConnection.createStatement();
 
-        int rows = statement.executeUpdate(sql);
+        statement.executeUpdate(sql);
 
         ProductRepository.delete(id);
         DatabaseConfiguration.closeDatabaseConnection();
