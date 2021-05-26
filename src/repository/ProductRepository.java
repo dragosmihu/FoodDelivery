@@ -23,7 +23,7 @@ public class ProductRepository {
         return 0;
     }
 
-    // PreparedStatement - use when we have parameters
+
     public static Product getProductById(int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         String selectSql = "SELECT * FROM products WHERE ProductId=?";
@@ -41,7 +41,7 @@ public class ProductRepository {
         return null;
     }
 
-    // PreparedStatement
+
     public static void updateProduct(String name, double price, int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         String updateNameSql = "UPDATE products SET name = ? , price= ? WHERE ProductId=?";

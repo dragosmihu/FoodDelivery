@@ -21,7 +21,7 @@ public class IngredientRepository {
 
     }
 
-    // PreparedStatement - use when we have parameters
+
     public static int getIngredientByName(String ingredient) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         String selectSql = "SELECT * FROM ingredients WHERE name=?";

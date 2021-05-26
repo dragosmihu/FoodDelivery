@@ -18,7 +18,7 @@ public class VehicleRepository {
         DatabaseConfiguration.closeDatabaseConnection();
     }
 
-    // PreparedStatement - use when we have parameters
+
     public static List<Vehicle> getVehicles() {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         String selectSql = "SELECT * FROM vehicles";
@@ -38,7 +38,7 @@ public class VehicleRepository {
         return vehicles;
     }
 
-    // PreparedStatement
+
     public static void updateVehicle(int noOfSeats, int noOfWheels, String producer, int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         String updateNameSql = "UPDATE vehicles SET noOfSeats = ?, noOfWheels = ?, producer = ? WHERE VehicleId=?";

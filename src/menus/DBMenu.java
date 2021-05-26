@@ -23,7 +23,7 @@ public class DBMenu {
         System.out.println("2) Read");
         System.out.println("3) Update");
         System.out.println("4) Delete");
-        System.out.println("0) Exit");
+
     }
 
     public static void menu() throws SQLException {
@@ -31,7 +31,7 @@ public class DBMenu {
         System.out.println("2) Vehicle");
         System.out.println("3) Food");
         System.out.println("4) Drink");
-        System.out.println("0) Exit");
+
 
         int option = scanner.nextInt();
         scanner.nextLine();

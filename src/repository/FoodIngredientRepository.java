@@ -18,7 +18,7 @@ public class FoodIngredientRepository {
         DatabaseConfiguration.closeDatabaseConnection();
     }
 
-    // PreparedStatement - use when we have parameters
+
     public static List<String> getIngredientsByFoodId(int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         String selectSql = "SELECT * FROM foodingredient WHERE FoodId=?";

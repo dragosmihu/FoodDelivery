@@ -6,7 +6,7 @@ import model.User;
 import java.sql.*;
 
 public class UserRepository {
-    // CallableStatement
+
 
     public static void insertUser(User user) throws SQLException {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
@@ -18,7 +18,6 @@ public class UserRepository {
         DatabaseConfiguration.closeDatabaseConnection();
     }
 
-    // PreparedStatement - use when we have parameters
     public static User getUserById(int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         String selectSql = "SELECT * FROM users WHERE UserId=?";
@@ -39,7 +38,7 @@ public class UserRepository {
         return null;
     }
 
-    // PreparedStatement
+
     public static void updateUserName(String firstName, String lastName, int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         String updateNameSql = "UPDATE users SET firstName=?, lastName=? WHERE UserId=?";

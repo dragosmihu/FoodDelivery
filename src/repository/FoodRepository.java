@@ -33,7 +33,7 @@ public class FoodRepository {
         DatabaseConfiguration.closeDatabaseConnection();
     }
 
-    // PreparedStatement - use when we have parameters
+
     public static List<Food> getFoods() {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
         String selectSql = "SELECT * FROM foods";
@@ -54,7 +54,7 @@ public class FoodRepository {
         return foods;
     }
 
-    // PreparedStatement
+
     public static void updateFood(String name, double price, List<String> ingredients, Taste T, int id) {
         Connection databaseConnection = DatabaseConfiguration.getDatabaseConnection();
 
